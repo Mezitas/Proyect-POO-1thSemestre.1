@@ -120,7 +120,7 @@ int main() {
 			cast = false;
 			break;
 		default:
-			std::cout << "No se encuentra tu elección, intentalo de nuevo" << std::endl;
+			std::cout << "No se encuentra tu elecciÃ³n, intentalo de nuevo" << std::endl;
 			break;
 		}
 	}
