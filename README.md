@@ -1,1 +1,1 @@
-This "proyect" is makes by a amateur dev
+This "proyect" is being made by an amateur dev
