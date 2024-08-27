@@ -80,7 +80,7 @@ void Player::changeLive(int change) {
 		std::cout << "Recibiste"<<change<<" vida"<<std::endl;
 	}
 	else {
-		std::cout << "Recibiste" << change << "daño" << std::endl;
+		std::cout << "Recibiste" << change << "daÃ±o" << std::endl;
 	}
 	live += change;
 }
@@ -208,7 +208,7 @@ int main() {
 			break;
 		default:
 			//Imprime un mensaje, si el valor de "election" es diferente a los casos disponibles
-			std::cout << "No se encuentra tu elección, intentalo de nuevo" << std::endl;
+			std::cout << "No se encuentra tu elecciÃ³n, intentalo de nuevo" << std::endl;
 			break;
 		}
 	}
