@@ -205,9 +205,7 @@ void Enemy::changeLive(int change) {
 	if (change < 0) {
 		std::cout << "Enemigo recibio " << change << " danio" << std::endl;
    live += change;
-  if(live<=0){
 		  dead();
-  }
 	}
 	
 }
