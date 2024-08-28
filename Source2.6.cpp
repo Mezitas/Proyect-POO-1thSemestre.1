@@ -204,9 +204,12 @@ int Enemy::punch() {
 void Enemy::changeLive(int change) {
 	if (change < 0) {
 		std::cout << "Enemigo recibio " << change << " danio" << std::endl;
-		dead();
+   live += change;
+  if(live<=0){
+		  dead();
+  }
 	}
-	live += change;
+	
 }
 void Enemy::kill() {
 	std::cout << "Has matado a un personaje" << std::endl;
