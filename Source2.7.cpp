@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 class Enemy {
 private:
@@ -21,7 +22,7 @@ public:
 	void setExp(int);
 	void setLevel(int);
 	//others
-
+	
 };
 Enemy::Enemy(int life, int power) :life(life), power(power) { exp = 10; level = 1; }
 Enemy::~Enemy() {
@@ -51,6 +52,8 @@ public:
 	~Three();
 	//Getters
 	int getLife();
+	int getExp();
+	int getLevel();
 	//setters
 	void setLife(int);
 	//others
@@ -68,6 +71,8 @@ Three::~Three() {
 }
 //getters
 int Three::getLife() { return life; }
+int Three::getExp(){return exp;}
+int Three::getLevel(){return level;}
 //setters
 void Three::setLife(int life) { this->life = life; }
 //others
@@ -161,8 +166,8 @@ void Player::changeProperties() {
 }
 void Player::upLevel() {
 	if (exp >= level * 5) {
-	level++;
-	changeProperties();
+		level++;
+		changeProperties();
 	}
 	
 }
@@ -181,26 +186,81 @@ void Player::hitEnemy() {
 	
 }
 void Player::takeDamage() {
-
+	
 }
 int Player::killEnemy() {
 	return 0;
 }
 //Menu
-
-void Menu() {
-
+void PauseMenu(){
+	system("pause");
+	std::cout<<"\t"<<"Escribe cualquier letra"<<std::endl;
+	system("cls");
+}
+int Menu(Player* player, Three* three) {
+	int a;
+	std::cout<<"Elige la opcion"<<std::endl;
+	std::cout<<"1) Mirar personaje"<<std::endl;
+	std::cout<<"2) Mirar Arbol"<<std::endl;
+	std::cout<<"3) Talar Arbol"<<std::endl;
+	std::cout<<"5) Cerrar juego"<<std::endl;
+	std::cin>>a;
+	switch(a){
+	case 1:
+		std::cout<<"--------------------------------"<<std::endl;
+		std::cout<<"PERSONAJE"<<std::endl;
+		std::cout<<"--------------------------------"<<std::endl;
+		std::cout<<"Vida:_________"<<player->getLife()<<" hp"<<std::endl;
+		std::cout<<"Nivel:________"<<player->getLevel()<<std::endl;
+		std::cout<<"Experiencia:__"<<player->getExp()<<std::endl;
+		std::cout<<"Kills:________"<<player->getKill()<<std::endl;
+		std::cout<<"Muertes:______"<<player->getDead()<<std::endl;
+		PauseMenu();
+		break;
+	case 2:
+		std::cout<<"--------------------------------"<<std::endl;
+		std::cout<<"ARBOL"<<std::endl;
+		std::cout<<"--------------------------------"<<std::endl;
+		std::cout<<"Vida:_________"<<three->getLife()<<" hp"<<std::endl;
+		std::cout<<"Nivel:________"<<three->getLevel()<<std::endl;
+		std::cout<<"Experiencia:__"<<three->getExp()<<std::endl;
+		PauseMenu();
+		break;
+	case 3:
+		player->upLevelThree();
+		std::cout<<"Haz golpeado el arbol"<<std::endl;
+		std::cout<<"Vida Arbol:___"<<three->getLife()<<" hp"<<std::endl;
+		PauseMenu();
+		break;
+	default:
+		break;
+	}
+	return a;
+}
+int MenuRepeat(Player* player, Three* three){
+	int repeat=Menu(player,three);
+	int ret;
+	if (repeat>5&&repeat<1){
+		std::cout<<"La opcion escogida no hace parte de ninguna opcion"<<std::endl;
+		std::cout<<"Vuenve a intentarlo"<<std::endl;
+		PauseMenu();
+		ret=1;
+	}else {
+		if (repeat==5){
+			ret=0;
+		}else{
+			ret=1;
+		}
+	}
+	return ret;
 }
 int main() {
 	Three* miarbol=new Three();
 	Enemy* miEnemigo = new Enemy(20,10);
 	Player jugador(miarbol,miEnemigo);
 	int rerun = 1;
-	while (rerun == 1) {
-	jugador.upLevelThree();
-	std::cout << miarbol->getLife() << std::endl;
-	std::cout << jugador.getPower()<<"y"<<jugador.getExp() << std::endl;
-	std::cin >> rerun;
+	while (rerun==1) {
+		rerun=MenuRepeat(&jugador,miarbol);
 	}
 	
 	return 0;
